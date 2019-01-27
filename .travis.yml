@@ -1,0 +1,13 @@
+sudo: required
+# Hey travis we need a copy of docker ready to go
+services:
+  - docker
+
+# Series of commands to execute before running tests
+# For us, it is going to be building our image (docker-react)
+before_install:
+  - docker build -t kh94/docker-react -f Dockerfile.dev .
+
+# Commands needed to actually run the test suite
+script:
+  - docker run kh94/docker-react npm run test -- --coverage
