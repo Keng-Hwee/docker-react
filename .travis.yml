@@ -11,3 +11,18 @@ before_install:
 # Commands needed to actually run the test suite
 script:
   - docker run kh94/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  # DockerReact-env.nppmrkrj3g.us-east-2.elasticbeanstalk.com 
+  region: "us-east-2"
+  # name of app
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-250722024273"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
